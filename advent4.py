@@ -1,9 +1,9 @@
 import re
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 def getMatches(line):
 	start = line.index(':')
@@ -23,18 +23,19 @@ def part1():
 			c = getMatches(line)
 			if c > 0:
 				total += 2**(c-1)
-		print(total)
+		return total
 
 def part2():
 	count = []
 	with open(f) as file:
 		for line in file:
 			count.append(getMatches(line))
+
 	scratchcards = [1] * len(count)
 	for idx in range(len(scratchcards)-1, -1, -1):
 		for n in range(1, count[idx]+1):
 			scratchcards[idx] += scratchcards[idx+n]
-	print(sum(scratchcards))
+	return sum(scratchcards)
 
-part1()
-part2()
+print("part1:", part1())
+print("part2:", part2())

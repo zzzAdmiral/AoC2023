@@ -1,8 +1,8 @@
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 def printRowflection(matrix, n):
 	for i, line in enumerate(matrix):
@@ -61,5 +61,5 @@ def solve(smudge):
 
 	return total
 
-print("part1: ", solve(0))
-print("part2: ", solve(1))
+print("part1:", solve(0))
+print("part2:", solve(1))

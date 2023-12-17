@@ -1,9 +1,9 @@
 import re
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 def part1(n, groups):
 	bag = {'red': 12, 'green': 13, 'blue': 14}
@@ -37,8 +37,8 @@ with open(f) as file:
 		total1 += part1(n, groups)
 		total2 += part2(groups)
 		n += 1
-	print(total1)
-	print(total2)
+	print("part1:", total1)
+	print("part2:", total2)
 
 
 

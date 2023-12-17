@@ -2,9 +2,9 @@ import re
 import sys
 import math
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 instructions = ""
 network = {}
@@ -33,7 +33,6 @@ def part1():
 
 def part2():
 	locs = [loc for loc in network.keys() if loc[-1] == 'A']
-	print(locs)
 	cycles = []
 	for loc in locs:
 		count = 0
@@ -47,8 +46,5 @@ def part2():
 				break
 	return len(instructions) * math.lcm(*cycles)
 
-# print(part1())
-print(part2())
-
-for steps, d in enumerate(cycle(instructions), start=1):
-	print(steps, d)
+print("part1:", part1())
+print("part2:", part2())

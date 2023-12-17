@@ -1,9 +1,9 @@
 import re
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 def part1(numbers, symbols):
 	total = 0
@@ -84,5 +84,6 @@ with open(f) as file:
 			i += 1
 		if num:
 			numbers[-1].add((start, i-1, num))
-print(part1(numbers, symbols))
-print(part2(numbers, gears))
+
+print("part1:", part1(numbers, symbols))
+print("part2:", part2(numbers, gears))

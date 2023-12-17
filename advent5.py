@@ -1,9 +1,9 @@
 import re
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 def parseConverter(group):
 	converter = []
@@ -18,7 +18,7 @@ with open(f) as file:
 	groups = text.split('\n\n')
 	converters = []
 	for group in groups[1:]:
-		converters.append(parseConverter(group))
+		converters.append(parseConverter(group.strip()))
 	seeds = list(map(int, groups[0].split()[1:]))
 
 conversionTypes = ["seed", "soil", "fertilizer", "water", "light", "temp", "humidity", "location"]
@@ -96,7 +96,7 @@ def part2():
 		else:
 			rng = listedLocation - nextStartLoc
 		if foundSeed := recursiveConversion((nextStartLoc, rng), 6):
-			print("found seed!", foundSeed)
+			# print("found seed!", foundSeed)
 			return seedToLocation(foundSeed)
 		nextStartLoc = nextStartLoc + rng
 

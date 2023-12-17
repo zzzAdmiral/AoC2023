@@ -2,22 +2,25 @@ import sys
 from collections import Counter
 import functools
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 types = ["High card", "One pair", "Two pair", "Three of a kind", "Full house", "Four of a kind", "Five of a kind"]
-# cards = {'A': 14, 'K': 13, 'Q': 12, 'J': 11, 'T': 10}
-cards = {'A': 14, 'K': 13, 'Q': 12, 'J': 0, 'T': 10}
+cards = {'A': 14, 'K': 13, 'Q': 12, 'J': 11, 'T': 10}
 for n in range(1, 10):
 	cards[str(n)] = n
 
 def handType(hand):
-	noJHand = [c for c in hand if c != 'J']
-	counter = sorted(Counter(noJHand).values(), reverse=True)
-	jokers = hand.count('J')
-	if jokers == 5:
-		return 6
+	counter = Counter(hand)
+	jokers = 0
+	# if Js are jokers
+	if cards['J'] == 0:
+		jokers = counter['J']
+		if jokers == 5:
+			return 6
+		counter['J'] = 0
+	counter = sorted(counter.values(), reverse=True)
 	counter[0] += jokers
 	if counter[0] == 5:
 		return 6
@@ -45,20 +48,28 @@ def compare(tup1, tup2):
 		if c1 != c2:
 			res = cards[c1] - cards[c2]
 			return 1 if res > 0 else -1
-	print("these hands aren't unique!", hands1)
-	return 0
+	raise Exception("Hand %s isn't unique!" % hands1)
 
-with open(f) as file:
-	allHands = []
-	for line in file:
-		hand, bid = line.split()
-		allHands.append((hand, bid))
-	print(cards)
+
+
+
+def winnings(allHands, use_jokers=False):
+	cards['J'] = 0 if use_jokers else 11
 	allHands = sorted(allHands, key=functools.cmp_to_key(compare))
 	total = 0
 	i = 1
 	for _, bid in allHands:
 		total += int(bid)*i
 		i += 1
-	print(total)
-#249511092
+	return total
+
+
+file = open(f)
+allHands = []
+for line in file:
+	hand, bid = line.split()
+	allHands.append((hand, bid))
+
+print("part1:", winnings(allHands, False))
+print("part2:", winnings(allHands, True))
+

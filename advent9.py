@@ -1,8 +1,8 @@
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 
 
 def getNextNum(seq, part):
@@ -26,5 +26,6 @@ for line in file:
 	seq = list(map(int, line.split()))
 	total1 += getNextNum(seq, 1)
 	total2 += getNextNum(seq, 2)
-print("part1: ", total1)
-print("part2: ", total2)
+
+print("part1:", total1)
+print("part2:", total2)

@@ -1,8 +1,8 @@
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 file = open(f)
 matrix = [line.strip() for line in file]
 
@@ -34,19 +34,12 @@ def shortestPath(g1, g2, expansion):
 			dist += expansion - 1
 	return dist
 
-def part1():
+def sumLengths(expansion):
 	total = 0
 	for i, g1 in enumerate(galaxies):
 		for g2 in galaxies[i+1:]:
-			total += shortestPath(g1, g2, 2)
+			total += shortestPath(g1, g2, expansion)
 	return total
 
-def part2():
-	total = 0
-	for i, g1 in enumerate(galaxies):
-		for g2 in galaxies[i+1:]:
-			total += shortestPath(g1, g2, 1000000)
-	return total
-
-print(part1())
-print(part2())
+print("part1:", sumLengths(2))
+print("part2:", sumLengths(1000000))

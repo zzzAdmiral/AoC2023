@@ -1,8 +1,8 @@
 import sys
 
-f = "input.txt"
+f = "inputs/input.txt"
 if 1 < len(sys.argv):
-	f = "input" + sys.argv[1] + ".txt"
+    f = "inputs/input" + sys.argv[1] + ".txt"
 file = open(f)
 matrix = [list(line.strip()) for line in file]
 
@@ -77,10 +77,7 @@ def updateGroupings(node):
 		groupings[i] = turns[symb][groupings[i]]
 
 
-frunc = 0
 def findOutsiders(node):
-	global frunc
-	frunc += 1
 	for i in [0,1]:
 		dx, dy = adjacent[groupings[i]]
 		x, y = node[0] + dx, node[1] + dy
@@ -107,7 +104,6 @@ def markNeighbors(i):
 	return count
 
 
-
 def part2():
 	for direction, possiblities in enumerate(possible[getSymbol(path[1])]):
 		if not possiblities:
@@ -125,5 +121,5 @@ def part2():
 
 path = getPath()
 print("part1: ", len(path) // 2)
+# Wow this is slow!
 print("part2: ", part2())
-print(frunc)
