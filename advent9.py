@@ -12,6 +12,7 @@ def getNextNum(seq, part):
 		nextSeq.append(seq[i]-seq[i-1])
 		if seq[i] != 0:
 			allZeros = False
+	print(nextSeq)
 	if allZeros:
 		return 0
 	if part == 1:
@@ -23,9 +24,7 @@ file = open(f)
 total1 = 0
 total2 = 0
 for line in file:
-	seq = list(map(int, line.split()))
+	seq = list(map(int, line.split(', ')))
 	total1 += getNextNum(seq, 1)
-	total2 += getNextNum(seq, 2)
 
 print("part1:", total1)
-print("part2:", total2)
